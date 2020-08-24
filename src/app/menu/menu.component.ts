@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 // Dish - name of class specified in 'shared/dish'
 import {Dish} from '../shared/dish';
+import {DishdetailComponent} from '../dishdetail/dishdetail.component';
 
 // const DISHES of type 'array of Dish (imported)'
 const DISHES : Dish[]= [
@@ -62,6 +63,8 @@ export class MenuComponent implements OnInit {
   dishes = DISHES;                       // type- Dish[]
 
   selectedDish :Dish = DISHES[0];       // type- Dish   , selected - one dish at a time
+
+  
 
   constructor() { }
 
