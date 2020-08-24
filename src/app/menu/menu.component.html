@@ -1,17 +1,41 @@
 <!-- fxLayout - property provided by flex layout in angular, used to specify
-       whether content is to shown horizontally ('row') or vertically('column')
+       whether content is to shown horizontally ('row') or vertically('column') in flex used inside the class
      fxLayoutGap - gap btw each entry of column
  -->
 
 <div class="container" fxLayout="column" fxLayoutGap="10px">
-  
-<!-- mat-list - provided by angular/material, like media in bootstrap , to list items
+
+  <!-- All fxFlex es inside container will be placed one after other(column) and data in them will also be stacked (column) -->
+  <div fxFlex>
+    <div>
+      <h1> Menu </h1>
+      <hr>
+    </div>
+  </div>
+
+  <div fxFlex>
+    <!-- no. of col=2 , one for img(small like logo) n h1 , other for p  -->
+    <mat-grid-list cols="2" rowHeight="200px">
+      <mat-grid-tile *ngFor="let dish of dishes">
+        <img height="200px" src={{dish.image}} alt={{dish.name}}>
+        <mat-grid-tile-footer>
+          <!--      |-> angular-pipe , type-> uppercase  , dish.name will be shown in uppercase          -->
+          <h1 matLine> {{dish.name | uppercase}} </h1>
+        </mat-grid-tile-footer>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
+
+  <!--
+    **
+     mat-list - provided by angular/material, like media in bootstrap , to list items
      fxFlex -   all items treated together as a piece
      *ngFor - like for loop
      dishes - name of array defined in .ts file
      dish   - taking one item of dishes array at a time
      matLineAvartar - class for img
--->
+    **
+  
   <mat-list fxFlex>
     <mat-list-item *ngFor="let dish of dishes">
       <img matListAvatar src={{dish.image}} alt={{dish.name}}>
@@ -19,5 +43,24 @@
       <p matLine > <span> {{dish.description}} </span> </p>
     </mat-list-item>
   </mat-list>
+  -->
+
+  <div fxFlex *ngIf="selectedDish">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>
+          <h3> {{selectedDish.name | uppercase }} </h3>
+        </mat-card-title>
+      </mat-card-header>
+      <img mat-card-image src={{selectedDish.image}} alt={{selectedDish.name}}>
+      <mat-card-content>
+        <p> {{selectedDish.description}} </p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button> LIKE </button>
+        <button mat-button> SHARE</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
 
 </div>
