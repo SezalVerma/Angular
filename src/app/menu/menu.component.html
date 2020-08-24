@@ -1,0 +1,23 @@
+<!-- fxLayout - property provided by flex layout in angular, used to specify
+       whether content is to shown horizontally ('row') or vertically('column')
+     fxLayoutGap - gap btw each entry of column
+ -->
+
+<div class="container" fxLayout="column" fxLayoutGap="10px">
+  
+<!-- mat-list - provided by angular/material, like media in bootstrap , to list items
+     fxFlex -   all items treated together as a piece
+     *ngFor - like for loop
+     dishes - name of array defined in .ts file
+     dish   - taking one item of dishes array at a time
+     matLineAvartar - class for img
+-->
+  <mat-list fxFlex>
+    <mat-list-item *ngFor="let dish of dishes">
+      <img matListAvatar src={{dish.image}} alt={{dish.name}}>
+      <h1 matLine> {{dish.name}} </h1>
+      <p matLine > <span> {{dish.description}} </span> </p>
+    </mat-list-item>
+  </mat-list>
+
+</div>
