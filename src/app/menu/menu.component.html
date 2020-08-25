@@ -16,7 +16,8 @@
   <div fxFlex>
     <!-- no. of col=2 , one for img(small like logo) n h1 , other for p  -->
     <mat-grid-list cols="2" rowHeight="200px">
-      <mat-grid-tile *ngFor="let dish of dishes">
+      <!-- when clicked on a tile , dish inside would be send as parameter to onSelect() handler -->
+      <mat-grid-tile *ngFor="let dish of dishes" (click)="onSelect(dish)">
         <img height="200px" src={{dish.image}} alt={{dish.name}}>
         <mat-grid-tile-footer>
           <!--      |-> angular-pipe , type-> uppercase  , dish.name will be shown in uppercase          -->
@@ -63,6 +64,10 @@
     </mat-card>
   </div> -->
   
-  <app-dishdetail> </app-dishdetail>
+  <!-- dishdetail's template would be shown here
+       property-name -  dish   
+       source of dish - selectedDish var
+   -->
+  <app-dishdetail [dish]="selectedDish"> </app-dishdetail>
 
 </div>

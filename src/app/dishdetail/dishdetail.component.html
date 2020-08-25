@@ -6,6 +6,10 @@
     fxLayoutGap="10px" 
     fxLayoutGap.xs="0">
 
+    <!-- ngIf="dish"
+         dish is supplied as input    (dish = selectedDish)
+         so when no dish is selected , no detail would be shown ie no div would be implemented till then.
+     -->
   <div fxFlex="40" *ngIf="dish" >
       <mat-card>
         <mat-card-header>
