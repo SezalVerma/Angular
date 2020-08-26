@@ -12,4 +12,15 @@ export class DishService {
   getDishes(): Dish[] {
       return DISHES;
   }
+
+  getDish(id : string): Dish {
+    // filter returns all elements of array that follow the given condition
+    // filters the array n return type array - so [index needed] , as we gotta get vonly one ans in array , use [0]
+    return DISHES.filter((dish)=>(dish.id===id))[0];
+  }
+
+  getFeaturedDish(): Dish{
+    // return dish for which featured boolean property is set to true
+    return DISHES.filter((dish)=>(dish.featured))[0];
+  }
 }

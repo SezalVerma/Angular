@@ -17,12 +17,13 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import {FlexLayoutModule} from '@angular/flex-layout';
+import {AppRoutingModule} from './app-routing/app-routing.module';
 
 import 'hammerjs';
 
 import { DishService } from './services/dish.service';
+import {PromotionService} from './services/promotion.service';
 
-import {AppRoutingModule} from './app-routing/app-routing.module';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import {AppRoutingModule} from './app-routing/app-routing.module';
     FlexLayoutModule
   ],
   providers: [
-    DishService
+    DishService,
+    PromotionService
   ],
   bootstrap: [AppComponent]
 })
