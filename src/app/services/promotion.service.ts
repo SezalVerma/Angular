@@ -9,19 +9,19 @@ export class PromotionService {
 
   constructor() { }
 
-  getPromotions(): Promotion[] {
-    return PROMOTIONS;
+  getPromotions(): Promise<Promotion[] >{
+    return Promise.resolve(PROMOTIONS);
    }
 
- getPromotion(id : string): Promotion {
+ getPromotion(id : string): Promise<Promotion >{
   // filter returns all elements of array that follow the given condition
   // filters the array n return type array - so [index needed] , as we gotta get vonly one ans in array , use [0]
-  return PROMOTIONS.filter((promo)=>(promo.id===id))[0];
+  return Promise.resolve(PROMOTIONS.filter((promo)=>(promo.id===id))[0]);
 }
 
-getFeaturedPromotion(): Promotion{
+getFeaturedPromotion(): Promise<Promotion>{
   // return promotion for which featured boolean property is set to true
-  return PROMOTIONS.filter((promo)=>(promo.featured))[0];
+  return Promise.resolve(PROMOTIONS.filter((promo)=>(promo.featured))[0]);
 }
 
   
