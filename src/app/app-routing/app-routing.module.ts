@@ -10,7 +10,7 @@ import {routes} from './routes';
     RouterModule.forRoot(routes)
   ],
   exports:[
-    // RouterModule is now exported to app.module thagt has the app-routing module imported
+    // RouterModule is now exported to app.module that has the app-routing module imported
     RouterModule
   ],
   declarations: []

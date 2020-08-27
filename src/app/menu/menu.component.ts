@@ -29,8 +29,8 @@ export class MenuComponent implements OnInit {
   //                                    declare any other handlers 
 
   //  when onSelect handler is called with a specific dish , that dish would be assigned to selectedDish var 
-  onSelect(dish : Dish){
-    this.selectedDish = dish;                     // this.name-- name var declared in this class
-  }
+  // onSelect(dish : Dish){
+  //   this.selectedDish = dish;                     // this.name-- name var declared in this class
+  //}
 
 }

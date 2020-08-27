@@ -8,9 +8,13 @@ import {DishdetailComponent} from '../dishdetail/dishdetail.component';
 
 export const routes: Routes =[
     {path : 'home' , component: HomeComponent},
-    {path : 'about' , component: AboutComponent},
+    {path : 'aboutus' , component: AboutComponent},
     {path:  'menu' , component: MenuComponent},
     {path : 'contactus' , component: ContactComponent},
+
+    // :id- name of router parameter ie id of dish retrieved here
+    {path : 'dishdetail/:id' , component : DishdetailComponent},
+
     // if no path specified , redirect to home component with full path in bar
     {path : '', redirectTo:'/home' , pathMatch:'full'}
 ]

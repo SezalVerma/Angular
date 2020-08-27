@@ -10,6 +10,7 @@ import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
 import {DishdetailComponent} from './dishdetail/dishdetail.component';
 
+
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatListModule} from '@angular/material/list';
@@ -18,11 +19,14 @@ import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {AppRoutingModule} from './app-routing/app-routing.module';
+import {MatDialogModule} from '@angular/material/dialog';
 
 import 'hammerjs';
 
 import { DishService } from './services/dish.service';
 import {PromotionService} from './services/promotion.service';
+import {LeaderService} from './services/leader.service';
+import { LoginComponent } from './login/login.component';
 
 
 @NgModule({
@@ -34,7 +38,8 @@ import {PromotionService} from './services/promotion.service';
     FooterComponent,
     HomeComponent,
     AboutComponent,
-    ContactComponent
+    ContactComponent,
+    LoginComponent
 
     
   ],
@@ -46,12 +51,18 @@ import {PromotionService} from './services/promotion.service';
     MatListModule,
     MatGridListModule,
     MatCardModule,
+    MatDialogModule,
     MatButtonModule,
     FlexLayoutModule
   ],
   providers: [
     DishService,
-    PromotionService
+    PromotionService,
+    LeaderService
+  ],
+  // entry components are used to overlay over other components (dialog)
+  entryComponents: [
+    LoginComponent
   ],
   bootstrap: [AppComponent]
 })
