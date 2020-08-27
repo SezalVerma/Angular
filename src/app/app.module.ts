@@ -27,7 +27,10 @@ import {FormsModule} from '@angular/forms';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatInputModule} from '@angular/material/input';
-
+// reactive forms
+import {ReactiveFormsModule} from '@angular/forms';
+import {MatSelectModule} from '@angular/material/select';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 import 'hammerjs';
 
@@ -64,7 +67,12 @@ import {LeaderService} from './services/leader.service';
     MatInputModule,
     MatFormFieldModule,
     FlexLayoutModule,
-    FormsModule
+    FormsModule,
+    // reactive forms
+    ReactiveFormsModule,
+    MatSelectModule,
+    MatSlideToggleModule
+         
   ],
   providers: [
     DishService,

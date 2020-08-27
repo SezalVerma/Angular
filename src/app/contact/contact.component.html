@@ -35,4 +35,62 @@
       </div>
     </div>
   </div>
+
+  <div fxFlex fxFlexOffset="20px" class="form-size">
+    <h3> Send Us Your Feedback </h3>
+
+    <p> {{feedbackForm.value | json}} {{feedbackForm.status | json}} </p>
+
+    <!-- feedbackform is defined in .ts file , is of type FormGroup n ties the form template with datamodel -->
+    <form novalidate [formGroup]="feedbackForm" (ngSubmit)="onSubmit()">
+
+      <p>
+        <mat-form-field class="half-width">
+          <!-- formControlName is name of fields / elements of form defined in form structure in .ts file under createForm() -->
+          <input matInput  formControlName="firstname" placeholder="First Name" name="firstname" type="text" required>
+        </mat-form-field>
+  
+        <mat-form-field class="half-width">
+          <input matInput  formControlName="lastname" placeholder="Last Name" name="lastname" type="text" required>
+        </mat-form-field>
+      </p>
+
+      <p>
+        <mat-form-field class="half-width">
+          <input matInput  formControlName="telnum" placeholder="Tel. Num" name="telnum" type="tel" required>
+        </mat-form-field>
+  
+        <mat-form-field class="half-width">
+          <input matInput  formControlName="email" placeholder="Email" name="email" type="email" required>
+        </mat-form-field>
+      </p>
+
+      <table class="form-size">
+        <td>
+          <!-- for boolean input , a slide button , on/off button -->
+          <mat-slide-toggle formControlName="agree"> May we contact you ?</mat-slide-toggle>
+        </td>
+        <td>
+          <!-- to select one item from a drop-down list with values from mat-option-->
+          <mat-select placeholder="How?"  formControlName="contacttype" >
+            <mat-option *ngFor="let ctype of contactType"  [value]="ctype" >
+              {{ctype}}
+            </mat-option>
+          </mat-select>
+        </td>
+      </table>
+
+      <p>
+        <mat-form-field class="full-width">
+          <textarea formControlName="message" matInput rows="12" placeholder="Your Feedback" type="text">
+          </textarea>
+        </mat-form-field>
+      </p>
+     
+      <button mat-button type="submit" class="background-primary text-floral-white">
+        SUBMIT
+      </button>
+
+    </form>
+  </div>
 </div>
