@@ -13,7 +13,7 @@
     </div>
   </div>
 
-  <div fxFlex>
+  <div fxFlex *ngIf="dishes">
     <!-- no. of col=2 , one for img(small like logo) n h1 , other for p  -->
     <mat-grid-list cols="2" rowHeight="200px">
       <!-- when clicked on a tile , dish inside would be send as parameter to onSelect() handler -->
@@ -27,6 +27,10 @@
         </mat-grid-tile-footer>
       </mat-grid-tile>
     </mat-grid-list>
+  </div>
+
+  <div fxFlex [hidden]="dishes">
+    <mat-spinner></mat-spinner><h4>Loading . . . Please Wait</h4>
   </div>
 
   <!--
