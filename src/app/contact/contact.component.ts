@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit , ViewChild } from '@angular/core';
 
 // reactive forms
 import{FormBuilder , FormGroup , Validators} from '@angular/forms';
@@ -19,6 +19,9 @@ export class ContactComponent implements OnInit {
 
   contactType = ContactType;
 
+  // to ensure form is completely reset to initial values after submition
+  @ViewChild('fform') feedbackFormDirective;
+
   constructor( private fb : FormBuilder) {
     this.createForm();
    }
@@ -28,14 +31,16 @@ export class ContactComponent implements OnInit {
 
   createForm(){
     this.feedbackForm = this.fb.group({
-        firstname : '',
-        lastname : '',
-        telnum : 0,
-        email : '',
+        firstname : ['' , Validators.required],
+        lastname : ['' , Validators.required],
+        telnum : [0 , Validators.required],
+        email : ['' , Validators.required],
         agree :  false,
         contacttype : 'none',
         message : ''
-    })
+    });
+   // this.feedbackFormDirective.resetForm();
+   //this.feedbackFormDirective.resetForm();
   }
 
   onSubmit(){
@@ -47,6 +52,15 @@ export class ContactComponent implements OnInit {
      */
     this.feedback = this.feedbackForm.value;
     console.log(this.feedback);
-    this.feedbackForm.reset();
+    this.feedbackForm.reset({
+      firstname : '',
+        lastname : '',
+        telnum : 0,
+        email : '',
+        agree :  false,
+        contacttype : 'none',
+        message : ''
+    });
+    // this.feedbackFormDirective.resetForm();
   }
 }

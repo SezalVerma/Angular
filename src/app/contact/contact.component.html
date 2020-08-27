@@ -48,20 +48,32 @@
         <mat-form-field class="half-width">
           <!-- formControlName is name of fields / elements of form defined in form structure in .ts file under createForm() -->
           <input matInput  formControlName="firstname" placeholder="First Name" name="firstname" type="text" required>
+          <mat-error *ngIf="feedbackForm.get('firstname').hasError('required') && feedbackForm.get('firstname').touched">
+             First Name is required!!
+          </mat-error>
         </mat-form-field>
   
         <mat-form-field class="half-width">
           <input matInput  formControlName="lastname" placeholder="Last Name" name="lastname" type="text" required>
+          <mat-error *ngIf="feedbackForm.get('lastname').hasError('required') && feedbackForm.get('lastname').touched">
+            Last Name is required!!
+         </mat-error>
         </mat-form-field>
       </p>
 
       <p>
         <mat-form-field class="half-width">
           <input matInput  formControlName="telnum" placeholder="Tel. Num" name="telnum" type="tel" required>
+          <mat-error *ngIf="feedbackForm.get('telnum').hasError('required') && feedbackForm.get('telnum').touched">
+            Tel.Num is required!!
+         </mat-error>
         </mat-form-field>
   
         <mat-form-field class="half-width">
           <input matInput  formControlName="email" placeholder="Email" name="email" type="email" required>
+          <mat-error *ngIf="feedbackForm.get('email').hasError('required') && feedbackForm.get('email').touched">
+            Email is required!!
+         </mat-error>
         </mat-form-field>
       </p>
 
@@ -87,7 +99,8 @@
         </mat-form-field>
       </p>
      
-      <button mat-button type="submit" class="background-primary text-floral-white">
+      <button mat-button type="submit" class="background-primary text-floral-white"
+        [disabled]="feedbackForm.invalid">
         SUBMIT
       </button>
 
