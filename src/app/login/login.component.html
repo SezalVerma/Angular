@@ -5,29 +5,46 @@
   <span class="flex-spacer"> </span>
   <!-- mat-dialog-close --closes the dialog when clicked on the button 
        &times; --- cross button        -->
-  <button mat-button mat-dialog-close> &times;</button>
+  <button mat-button mat-dialog-close > &times;</button>
 </mat-toolbar>
 
 <p> {{user | json }} </p>
 
-<!-- novalidate--- validation would be handled by angular itself, not manually using html -->
-<form novalidate (ngSubmit)="onSubmit()">
+<!-- novalidate--- validation would be handled by angular itself, not manually using html 
+     #loginForm--- template variable that would provide info abt state of form 
+-->
+<form novalidate 
+  #loginForm="ngForm" 
+  (ngSubmit)="onSubmit()">
   <mat-dialog-content>
     <p>
       <mat-form-field>
         <!-- ngModel-- for data binding , user-- model , username -- model attribute    -->
-        <input matInput name="username" type="text" placeholder="Username" [(ngModel)]="user.username">
+        <input matInput name="username" type="text" placeholder="Username" [(ngModel)]="user.username"
+               #username="ngModel" required>
+        <!-- username - template var declared in input fr username
+             errors?.required  - if error type is required (as username has required tag applied )-->
+         <mat-error *ngIf="username.errors?.required"> Username is empty!!</mat-error>
       </mat-form-field>
+
       <mat-form-field>
-        <input matInput name="password" type="password" placeholder="Password" [(ngModel)]="user.password">
+        <input matInput name="password" type="password" placeholder="Password" 
+               #password="ngModel" required [(ngModel)]="user.password">
+        <mat-error *ngIf="password.errors?.required"> Password is empty!!</mat-error>
       </mat-form-field>
+
       <mat-checkbox  name="remember" [(ngModel)]="user.remember"> Remember Me</mat-checkbox>
     </p>
   </mat-dialog-content>
+
   <mat-dialog-actions>
     <span class="flex-spacer"></span>
-    <button mat-button mat-dialog-close> Cancel </button>
-    <button mat-button type="submit" class="background-primary text-floral-white"> LOGIN </button>  
+    <button mat-button mat-dialog-close > Cancel </button>
+    <button mat-button type="submit" class=" text-floral-white background-primary"
+       [disabled]="loginForm.form.invalid"> LOGIN </button>  
+       <!-- submit button disabled when loginForm(attribute of form in our page ) state is invalid 
+            ie some error in ngModel(applied to all input fields of the form) 
+            Error in this case - required fields if empty -->
   </mat-dialog-actions>
 
 </form>
