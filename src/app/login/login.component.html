@@ -1,12 +1,33 @@
 <mat-toolbar color="primary">
   Login
-
   <!-- flex-spacer is defined by us in styles.scss , it  creates a lot of space btw object above n below it (buttons)
         , thus shifting the next button/object to the right most side of toolbar-->
   <span class="flex-spacer"> </span>
-
   <!-- mat-dialog-close --closes the dialog when clicked on the button 
        &times; --- cross button        -->
   <button mat-button mat-dialog-close> &times;</button>
-  
 </mat-toolbar>
+
+<p> {{user | json }} </p>
+
+<!-- novalidate--- validation would be handled by angular itself, not manually using html -->
+<form novalidate (ngSubmit)="onSubmit()">
+  <mat-dialog-content>
+    <p>
+      <mat-form-field>
+        <!-- ngModel-- for data binding , user-- model , username -- model attribute    -->
+        <input matInput name="username" type="text" placeholder="Username" [(ngModel)]="user.username">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput name="password" type="password" placeholder="Password" [(ngModel)]="user.password">
+      </mat-form-field>
+      <mat-checkbox  name="remember" [(ngModel)]="user.remember"> Remember Me</mat-checkbox>
+    </p>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <span class="flex-spacer"></span>
+    <button mat-button mat-dialog-close> Cancel </button>
+    <button mat-button type="submit" class="background-primary text-floral-white"> LOGIN </button>  
+  </mat-dialog-actions>
+
+</form>

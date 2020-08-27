@@ -9,6 +9,7 @@ import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
 import {DishdetailComponent} from './dishdetail/dishdetail.component';
+import { LoginComponent } from './login/login.component';
 
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -19,14 +20,19 @@ import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {AppRoutingModule} from './app-routing/app-routing.module';
+// dialog
 import {MatDialogModule} from '@angular/material/dialog';
+// forms
+import {FormsModule} from '@angular/forms';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatInputModule} from '@angular/material/input';
 
 import 'hammerjs';
 
 import { DishService } from './services/dish.service';
 import {PromotionService} from './services/promotion.service';
 import {LeaderService} from './services/leader.service';
-import { LoginComponent } from './login/login.component';
 
 
 @NgModule({
@@ -53,7 +59,11 @@ import { LoginComponent } from './login/login.component';
     MatCardModule,
     MatDialogModule,
     MatButtonModule,
-    FlexLayoutModule
+    MatCheckboxModule,
+    MatInputModule,
+    MatFormFieldModule,
+    FlexLayoutModule,
+    FormsModule
   ],
   providers: [
     DishService,
