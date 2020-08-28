@@ -31,9 +31,11 @@ export class DishdetailComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    
+      //   subscribing to the observable
       // getting id of active route which again in menu.html provides with current dish id
       let id = this.route.snapshot.params['id'];
-       this.dishService.getDish(id).then(
+       this.dishService.getDish(id).subscribe(
         (dish)=> this.dish= dish
       );
   }
