@@ -17,7 +17,7 @@
     <!-- no. of col=2 , one for img(small like logo) n h1 , other for p  -->
     <mat-grid-list cols="2" rowHeight="200px">
       <!-- when clicked on a tile , dish inside would be send as parameter to onSelect() handler -->
-      <mat-grid-tile *ngFor="let dish of dishes" [routerLink]= "['/dishdetail', dish.id]" >
+      <mat-grid-tile *ngFor="let dish of dishes" [routerLink]= "['/dishdetail', dish.id]" appHighlight >
       <!-- (click)="onSelect(dish)" - was used for mat-grid-tile to get current dish -->
 
         <img height="200px" src="{{BaseURL + dish.image}}" alt={{dish.name}}>

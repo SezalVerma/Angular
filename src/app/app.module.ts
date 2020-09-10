@@ -44,6 +44,7 @@ import { DishService } from './services/dish.service';
 import {PromotionService} from './services/promotion.service';
 import {LeaderService} from './services/leader.service';
 import { ProcessHttpMessageService } from './services/process-http-message.service';
+import { HighlightDirective } from './directives/highlight.directive';
 
 
 @NgModule({
@@ -56,7 +57,8 @@ import { ProcessHttpMessageService } from './services/process-http-message.servi
     HomeComponent,
     AboutComponent,
     ContactComponent,
-    LoginComponent
+    LoginComponent,
+    HighlightDirective
 
     
   ],

@@ -54,3 +54,10 @@ body{
 .flex-spacer {
   flex: 1 1 auto;
 }
+
+.highlight{
+  background-color : $background-pale;
+  border : 1px solid $background-dark;
+  z-index : 1;                        // raised from flat - surface, a bit 3d
+  transform : scale(1.01)             // inc size by 0.01
+}
