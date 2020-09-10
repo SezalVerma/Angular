@@ -7,7 +7,7 @@ import { of, Observable } from 'rxjs';
 import { delay , map, catchError} from 'rxjs/operators';
 
 // http
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {baseURL} from '../shared/baseurl';
 import {ProcessHttpMessageService} from './process-http-message.service';
 
@@ -43,5 +43,16 @@ export class DishService {
      // getDishes() already converts error into simple error through handleerror called above in getDishes()
     return this.getDishes().pipe(map(Dishes=> Dishes.map(Dish=>Dish.id)))
     .pipe(catchError(error=> error));
+   }
+
+   putDish(dish : Dish) : Observable<Dish> {
+     const httpOptions = {
+       headers : new HttpHeaders({
+         'Content-Type' : 'application/json'
+       })
+     }
+     // (url at where to put , what to put , any options)
+     return this.http.put<Dish>(baseURL + 'dishes/'+ dish.id , dish , httpOptions)
+      .pipe(catchError(this.ProcessHttpMessageService.handleError));
    }
  }

@@ -33,7 +33,7 @@ export class DishdetailComponent implements OnInit {
   // 'dish' would be supplied as input to dishdetail's template (wherever <app-dishdetail> is mentioned ie in menu's template).
 //   @Input()
     dish :  Dish;
-
+    dishCopy : Dish;
     reviewForm : FormGroup;
     review : Comment;
     errMess : string;
@@ -81,7 +81,7 @@ export class DishdetailComponent implements OnInit {
       // params - observable , any change in it will automatically subscribe the observable again
       this.route.params.pipe(switchMap((params: Params) => this.dishService.getDish(params['id'])))
       .subscribe(dish => { 
-         this.dish = dish,
+         this.dish = dish; this.dishCopy= dish;
          // next n prev values also changing along with current id dish
          this.setPrevNext(dish.id) },
          errmess=> this.errMess= <any> errmess ); 
@@ -132,7 +132,13 @@ export class DishdetailComponent implements OnInit {
     this.review = this.reviewForm.value;
     const date = new Date();
     this.review.date = date.toISOString();
-    this.dish.comments.push(this.review);
+    this.dishCopy.comments.push(this.review);
+    this.dishService.putDish(this.dishCopy).subscribe(
+      dish=>{
+        this.dish= dish ; this.dishCopy= dish;
+      },
+      errmess=> { this.dish= null , this.dishCopy=null, this.errMess=<any>errmess ; }
+    )
     
     this.reviewForm.reset({
       rating:5,
