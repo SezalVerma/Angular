@@ -10,6 +10,7 @@ import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
 import {DishdetailComponent} from './dishdetail/dishdetail.component';
 import { LoginComponent } from './login/login.component';
+import {baseURL} from './shared/baseurl';
 
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -34,12 +35,15 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatSliderModule} from '@angular/material/slider';
 // promises
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+// http
+import {HttpClientModule} from '@angular/common/http';
 
 import 'hammerjs';
 
 import { DishService } from './services/dish.service';
 import {PromotionService} from './services/promotion.service';
 import {LeaderService} from './services/leader.service';
+import { ProcessHttpMessageService } from './services/process-http-message.service';
 
 
 @NgModule({
@@ -76,13 +80,18 @@ import {LeaderService} from './services/leader.service';
     MatSelectModule,
     MatSlideToggleModule,
     MatProgressSpinnerModule,
-    MatSliderModule
+    MatSliderModule,
+    // http
+    HttpClientModule
          
   ],
   providers: [
     DishService,
     PromotionService,
-    LeaderService
+    LeaderService,
+    ProcessHttpMessageService,
+    // takes value of baseurl  of json server & provide it to our angular app
+    {provide : 'BaseURL' , useValue : baseURL}
   ],
   // entry components are used to overlay over other components (dialog)
   entryComponents: [

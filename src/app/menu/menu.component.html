@@ -20,7 +20,7 @@
       <mat-grid-tile *ngFor="let dish of dishes" [routerLink]= "['/dishdetail', dish.id]" >
       <!-- (click)="onSelect(dish)" - was used for mat-grid-tile to get current dish -->
 
-        <img height="200px" src={{dish.image}} alt={{dish.name}}>
+        <img height="200px" src="{{BaseURL + dish.image}}" alt={{dish.name}}>
          <mat-grid-tile-footer> 
           <!-- angular-pipe , type-> uppercase  , dish.name will be shown in uppercase           -->
           <h1 matLine> {{dish.name | uppercase}} </h1>
@@ -29,8 +29,13 @@
     </mat-grid-list>
   </div>
 
-  <div fxFlex [hidden]="dishes">
+  <div fxFlex [hidden]="dishes || errmess">
     <mat-spinner></mat-spinner><h4>Loading . . . Please Wait</h4>
+  </div>
+
+  <div fxflex *ngIf="errmess">
+    <h2> Error</h2>
+    <h4> {{errmess}} </h4>
   </div>
 
   <!--

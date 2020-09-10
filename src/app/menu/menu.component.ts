@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit , Inject} from '@angular/core';
 
 // Dish - name of class specified in 'shared/dish'
 import {Dish} from '../shared/dish';
@@ -15,15 +15,17 @@ export class MenuComponent implements OnInit {
   //                                       declare vars here
 
   dishes : Dish[];                                                  // type- Dish[]
+  errmess : string;
+ 
 
-  selectedDish :Dish ;
-
-  constructor(private dishService : DishService) {
+  constructor(private dishService : DishService,
+    @Inject('BaseURL')private BaseURL ) {
    }
 
   ngOnInit() {
      this.dishService.getDishes().subscribe(
-      (dishes)=> this.dishes= dishes
+      (dishes)=> this.dishes= dishes,                // if subscribe msg returns value
+      errmess=> this.errmess = <any> errmess         // if subscribe throws an err , convert to string
     );
 
   }

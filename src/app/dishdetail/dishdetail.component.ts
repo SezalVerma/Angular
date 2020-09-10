@@ -1,4 +1,4 @@
-import { Component, OnInit , ViewChild
+import { Component, OnInit , ViewChild , Inject
 // Input    -- imported for declaring input decorator for a variable
         } from '@angular/core';
 
@@ -36,6 +36,7 @@ export class DishdetailComponent implements OnInit {
 
     reviewForm : FormGroup;
     review : Comment;
+    errMess : string;
 
     formErrors={
       'author': '',
@@ -63,7 +64,8 @@ export class DishdetailComponent implements OnInit {
       private dishService : DishService,
       private location : Location,
       private route : ActivatedRoute,
-      private fb : FormBuilder  
+      private fb : FormBuilder  ,
+      @Inject("BaseURL") private BaseURL
   ) {
       this.createForm();
    }
@@ -72,13 +74,17 @@ export class DishdetailComponent implements OnInit {
     
       //   subscribing to the observable
       // getting id of active route which again in menu.html provides with current dish id
-      this.dishService.getDishIds().subscribe(dishIds => this.dishIds = dishIds);
+      this.dishService.getDishIds().subscribe(
+        dishIds => this.dishIds = dishIds
+        );
+
       // params - observable , any change in it will automatically subscribe the observable again
       this.route.params.pipe(switchMap((params: Params) => this.dishService.getDish(params['id'])))
       .subscribe(dish => { 
-      this.dish = dish; 
-      // next n prev values also changing along with current id dish
-      this.setPrevNext(dish.id); }); 
+         this.dish = dish,
+         // next n prev values also changing along with current id dish
+         this.setPrevNext(dish.id) },
+         errmess=> this.errMess= <any> errmess ); 
   }
 
   createForm(){
