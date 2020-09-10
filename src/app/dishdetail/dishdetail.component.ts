@@ -20,14 +20,26 @@ import { switchMap } from 'rxjs/operators';
 import{FormBuilder , FormGroup , Validators, FormGroupDirective} from '@angular/forms';
 import { controlNameBinding } from '@angular/forms/src/directives/reactive_directives/form_control_name';
 
-
+import {trigger , state , style , animate , transition } from '@angular/animations';
 
 
 @Component({
   selector: 'app-dishdetail',
   templateUrl: './dishdetail.component.html',
-  styleUrls: ['./dishdetail.component.scss']
+  styleUrls: ['./dishdetail.component.scss'],
+  animations : [ trigger( 'visibility',[
+    state('shown' , style ({
+      opacity : 1,
+      transform : 'scale(1.0)'
+    })),
+    state('hidden' , style({
+      opacity : 0,
+      transform : 'scale(0.5)'
+    })),
+    transition('*=>*', animate('0.1s ease-in-out'))
+  ])]
 })
+
 export class DishdetailComponent implements OnInit {
  
   // 'dish' would be supplied as input to dishdetail's template (wherever <app-dishdetail> is mentioned ie in menu's template).
@@ -37,6 +49,7 @@ export class DishdetailComponent implements OnInit {
     reviewForm : FormGroup;
     review : Comment;
     errMess : string;
+    visibility = 'shown';
 
     formErrors={
       'author': '',
@@ -79,11 +92,12 @@ export class DishdetailComponent implements OnInit {
         );
 
       // params - observable , any change in it will automatically subscribe the observable again
-      this.route.params.pipe(switchMap((params: Params) => this.dishService.getDish(params['id'])))
+      this.route.params
+      .pipe(switchMap ((params: Params) =>{ this.visibility= 'hidden'; return this.dishService.getDish(params['id']) } ))
       .subscribe(dish => { 
          this.dish = dish; this.dishCopy= dish;
          // next n prev values also changing along with current id dish
-         this.setPrevNext(dish.id) },
+         this.setPrevNext(dish.id) ; this.visibility='shown'}, 
          errmess=> this.errMess= <any> errmess ); 
   }
 
