@@ -11,7 +11,7 @@ import {Params, ActivatedRoute} from '@angular/router';
 import {Dish} from '../shared/dish';
 import { DishService } from '../services/dish.service';
 import {Comment} from '../shared/Comment';
-
+import {visibility, flyInOut, expand} from '../animations/app-animation';
 
 import { switchMap } from 'rxjs/operators';
 
@@ -20,24 +20,20 @@ import { switchMap } from 'rxjs/operators';
 import{FormBuilder , FormGroup , Validators, FormGroupDirective} from '@angular/forms';
 import { controlNameBinding } from '@angular/forms/src/directives/reactive_directives/form_control_name';
 
-import {trigger , state , style , animate , transition } from '@angular/animations';
+
 
 
 @Component({
   selector: 'app-dishdetail',
   templateUrl: './dishdetail.component.html',
   styleUrls: ['./dishdetail.component.scss'],
-  animations : [ trigger( 'visibility',[
-    state('shown' , style ({
-      opacity : 1,
-      transform : 'scale(1.0)'
-    })),
-    state('hidden' , style({
-      opacity : 0,
-      transform : 'scale(0.5)'
-    })),
-    transition('*=>*', animate('0.1s ease-in-out'))
-  ])]
+  animations : [ 
+    visibility() , flyInOut(), expand()
+  ],
+  host : {
+    '[@flyInOut]' :' true',
+    'style' : 'display : block'
+  }
 })
 
 export class DishdetailComponent implements OnInit {
@@ -49,7 +45,9 @@ export class DishdetailComponent implements OnInit {
     reviewForm : FormGroup;
     review : Comment;
     errMess : string;
-    visibility = 'shown';
+    
+     // initially , visibility= shown for components that has [@visibility]='visibility' attached to them
+     visibility = 'shown';  
 
     formErrors={
       'author': '',
@@ -93,11 +91,16 @@ export class DishdetailComponent implements OnInit {
 
       // params - observable , any change in it will automatically subscribe the observable again
       this.route.params
-      .pipe(switchMap ((params: Params) =>{ this.visibility= 'hidden'; return this.dishService.getDish(params['id']) } ))
+      .pipe(switchMap ((params: Params) =>{ 
+        // whenever param changes , i.e dish changes , visibility= hidden
+        this.visibility= 'hidden'; 
+        return this.dishService.getDish(params['id']) } ))
       .subscribe(dish => { 
          this.dish = dish; this.dishCopy= dish;
          // next n prev values also changing along with current id dish
-         this.setPrevNext(dish.id) ; this.visibility='shown'}, 
+         this.setPrevNext(dish.id) ; 
+         // when we receive new dish with new params , visibility= shown
+         this.visibility='shown'}, 
          errmess=> this.errMess= <any> errmess ); 
   }
 

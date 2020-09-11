@@ -13,7 +13,7 @@
     </div>
   </div>
 
-  <div fxFlex *ngIf="dishes">
+  <div fxFlex *ngIf="dishes" [@expand]>
     <!-- no. of col=2 , one for img(small like logo) n h1 , other for p  -->
     <mat-grid-list cols="2" rowHeight="200px">
       <!-- when clicked on a tile , dish inside would be send as parameter to onSelect() handler -->
