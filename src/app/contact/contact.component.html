@@ -39,10 +39,10 @@
   <div fxFlex fxFlexOffset="20px" class="form-size">
     <h3> Send Us Your Feedback </h3>
 
-    <p> {{feedbackForm.value | json}} {{feedbackForm.status | json}} </p>
+    <!-- <p> {{feedbackForm.value | json}} {{feedbackForm.status | json}} </p> -->
 
     <!-- feedbackform is defined in .ts file , is of type FormGroup n ties the form template with datamodel -->
-    <form novalidate [formGroup]="feedbackForm" (ngSubmit)="onSubmit()">
+    <form class="form" novalidate [formGroup]="feedbackForm" *ngIf="showForm" (ngSubmit)="onSubmit()" >
 
       <p>
         <mat-form-field class="half-width">
@@ -106,5 +106,21 @@
       </button>
 
     </form>
+
+    <div fxflex  [hidden]=" showForm || submitfeedback">
+      <h2> Submitting Form </h2>
+      <mat-spinner></mat-spinner>
+    </div>
+
+    <div fxflex *ngIf="submitfeedback" [@expand]  >
+      <h2> Your Submission</h2>
+      <p> First Name : {{submitfeedback.firstname}} </p>
+      <p> Last Name : {{submitfeedback.lastname}} </p>
+      <p> Tel. Number : {{submitfeedback.telnum}} </p>
+      <p> Email : {{submitfeedback.email}} </p>
+      <p> Contact You? : {{submitfeedback.agree}} </p>
+      <p> How? : {{submitfeedback.contacttype}} </p>
+      <p> Feedback : {{submitfeedback.message}} </p>
+    </div>
   </div>
 </div>

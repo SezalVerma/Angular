@@ -45,7 +45,7 @@ import {PromotionService} from './services/promotion.service';
 import {LeaderService} from './services/leader.service';
 import { ProcessHttpMessageService } from './services/process-http-message.service';
 import { HighlightDirective } from './directives/highlight.directive';
-
+import {FeedbackService} from './services/feedback.service';
 
 @NgModule({
   declarations: [
@@ -91,6 +91,7 @@ import { HighlightDirective } from './directives/highlight.directive';
     DishService,
     PromotionService,
     LeaderService,
+    FeedbackService,
     ProcessHttpMessageService,
     // takes value of baseurl  of json server & provide it to our angular app
     {provide : 'BaseURL' , useValue : baseURL}

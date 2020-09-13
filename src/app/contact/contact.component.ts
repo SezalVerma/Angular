@@ -3,8 +3,9 @@ import { Component, OnInit , ViewChild } from '@angular/core';
 // reactive forms
 import{FormBuilder , FormGroup , Validators} from '@angular/forms';
 import {Feedback , ContactType} from '../shared/feedback';
+import { FeedbackService } from '../services/feedback.service';
 import { NONE_TYPE } from '@angular/compiler/src/output/output_ast';
-import {flyInOut} from '../animations/app-animation';
+import {flyInOut , expand} from '../animations/app-animation';
 
 @Component({
   selector: 'app-contact',
@@ -14,15 +15,19 @@ import {flyInOut} from '../animations/app-animation';
     '[@flyInOut]' :' true',
     'style' : 'display : block'
   },
-  animations: [ flyInOut()]
+  animations: [ flyInOut() ,  expand()]
 })
 export class ContactComponent implements OnInit {
+
+  
 
   // form-model that would host the reactive form 
   feedbackForm : FormGroup;
   // data-model
   feedback : Feedback;
-
+  submitfeedback =null;
+  showForm =true;
+  err : string;
   contactType = ContactType;
 
   // to ensure form is completely reset to initial values after submition
@@ -56,7 +61,7 @@ export class ContactComponent implements OnInit {
     },
   };
 
-  constructor( private fb : FormBuilder) {
+  constructor( private fb : FormBuilder , private feedbackService : FeedbackService) {
     this.createForm();
    }
 
@@ -115,14 +120,24 @@ export class ContactComponent implements OnInit {
   }
 
   onSubmit(){
-
+    
      /* both feedback n feedbackForm we declared have same strc , so we could directly map the values of all
         elements directly , otherwise each value had to be mapped individually
         value -- takes values of all vars defined in the form at once 
         reset-- empties the form 
      */
+ 
     this.feedback = this.feedbackForm.value;
-    console.log(this.feedback);
+   // console.log(this.feedback);
+    this.showForm= false;
+    this.feedbackService.submitFeedback(this.feedback)
+    .subscribe(feedback=> { 
+      this.submitfeedback= feedback ,
+      this.feedback = null,
+      setTimeout(()=>{  this.submitfeedback=null , this.showForm=true;}, 5000)} ,
+      err=> {this.err= err , this.submitfeedback=null });
+      
+    
     this.feedbackForm.reset({
       firstname : '',
         lastname : '',

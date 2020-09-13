@@ -100,7 +100,7 @@ export class DishdetailComponent implements OnInit {
          // next n prev values also changing along with current id dish
          this.setPrevNext(dish.id) ; 
          // when we receive new dish with new params , visibility= shown
-         this.visibility='shown'}, 
+         this.visibility='shown' } , 
          errmess=> this.errMess= <any> errmess ); 
   }
 

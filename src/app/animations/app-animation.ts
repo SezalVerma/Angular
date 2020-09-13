@@ -11,7 +11,7 @@ export function visibility(){
           transform : 'scale(0.5)'
         })),
         // 0.1 s interval while transition btw states , ease-in-out ensures smooth transition
-        transition('*=>*', animate('0.05s ease-in-out')) 
+        transition('*=>*', animate('5s ease-in-out')) 
       ])
 }
 
@@ -48,7 +48,7 @@ export function expand(){
         opacity : 0,
         transform :' translateY(-50%)'
       }),
-      animate('200ms ease-in', style({ opacity : 1 , transform: 'translateY(0)'}))
+      animate('0.5ms ease-in', style({ opacity : 1 , transform: 'translateY(0)'}))
     ])
   ])
 }
